@@ -26,6 +26,8 @@ namespace Final_Project
 
 
         public void Enqueue(int priority, T obj)
+        //then things are enqueued they get sorted into their proper place before anything else happens meaning
+        // the user doesnt have to manually give input to sort it
         {
             Node node = new Node() { Priority = priority, Object = obj };
             queue.Add(node);
@@ -36,7 +38,7 @@ namespace Final_Project
             else
                 BuildHeapMax(heapSize);
         }
-        public T Dequeue()
+        public T Dequeue() 
         {
             if (heapSize > -1)
             {
@@ -101,7 +103,7 @@ namespace Final_Project
                 i = (i - 1) / 2;
             }
         }
-        private void MaxHeapify(int i)
+        private void MaxHeapify(int i) //is part of my sorting algorithm
         {
 
             int left = ChildL(i);
@@ -120,7 +122,7 @@ namespace Final_Project
                 MaxHeapify(heighst);
             }
         }
-        private void MinHeapify(int i)
+        private void MinHeapify(int i) //is part of my sorting algorithm
         {
 
             int left = ChildL(i);
