@@ -11,14 +11,14 @@ namespace Final_Project
             public T Object { get; set; }
         }
 
-        
+
         List<Node> queue = new List<Node>();
         int heapSize = -1;
         bool _isMinPriorityQueue;
         public int Count { get { return queue.Count; } }
 
         /// <param name="isMinPriorityQueue"></param>
-        
+
         public MakeRecords(bool isMinPriorityQueue = false)
         {
             _isMinPriorityQueue = isMinPriorityQueue;
@@ -38,7 +38,7 @@ namespace Final_Project
             else
                 BuildHeapMax(heapSize);
         }
-        public T Dequeue() 
+        public T Dequeue()
         {
             if (heapSize > -1)
             {

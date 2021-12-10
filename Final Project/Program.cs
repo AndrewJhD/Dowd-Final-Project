@@ -79,7 +79,7 @@ namespace Final_Project
             double average = timeCounter / workCounter;
             Stack<Employee> employeeStack = new Stack<Employee>(1); //to store emloyee
             MakeRecords<Work> empWorkRecord = new MakeRecords<Work>();
-            
+
             while (decision != 5) //menu looper
             {
 
@@ -90,7 +90,7 @@ namespace Final_Project
                 Console.WriteLine("|-------------------------------------------------------------------------------------|");
                 Console.WriteLine("| 1 - create an employee                                                              |");
                 Console.WriteLine("| 2 - add a completed work assignment to the record                                   |");
-                Console.WriteLine("| 3 - get a preview of the record                                                     |");                                               
+                Console.WriteLine("| 3 - get a preview of the record                                                     |");
                 Console.WriteLine("| 4 - convert the record into a file                                                  |");
                 Console.WriteLine("| 5 - exit the program                                                                |");
                 Console.WriteLine("|-------------------------------------------------------------------------------------|");
@@ -114,7 +114,7 @@ namespace Final_Project
                         decision = 0;
                     }
 
-                    
+
                 }
 
                 if (decision == 1) //only 1 at a time will work for this
@@ -363,61 +363,61 @@ namespace Final_Project
                 }
                 else if (decision == 4) //file maker
                 {
-                    if ( workCounter == 0)
+                    if (workCounter == 0)
                     {
                         Console.WriteLine("Error: You haven't inputed any assignments yet");
                     }
-                    else 
-                    { 
-                    string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
-
-
-                    string path = @"C:\Temp\" + employeeName + date + "EmployeeRecords.txt";
-                    try
+                    else
                     {
-
-                        StreamWriter sw = new StreamWriter(path);
-
-                        //writing stuff into the file
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine(employeeStack.Peek());
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("Employee Assignments:");
-                        sw.WriteLine("-------------------------------------------------");
-
-                        empWorkRecord.PrintAll();
-
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("Employee Statistics:");
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("Total difficulty of all assignments: " + difTotal);
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("Total number of assignments: " + workCounter);
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine("Total hours of work done on all assignments: " + timeCounter);
-                        sw.WriteLine("-------------------------------------------------");
-                        sw.WriteLine(" Total average hours per assignment: " + average);
-                        sw.WriteLine("-------------------------------------------------");
-
-                        //Close the file
-                        sw.Close();
+                        string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
 
 
+                        string path = @"C:\Temp\" + employeeName + date + "EmployeeRecords.txt";
+                        try
+                        {
+
+                            StreamWriter sw = new StreamWriter(path);
+
+                            //writing stuff into the file
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine(employeeStack.Peek());
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("Employee Assignments:");
+                            sw.WriteLine("-------------------------------------------------");
+
+                            empWorkRecord.PrintAll();
+
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("Employee Statistics:");
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("Total difficulty of all assignments: " + difTotal);
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("Total number of assignments: " + workCounter);
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine("Total hours of work done on all assignments: " + timeCounter);
+                            sw.WriteLine("-------------------------------------------------");
+                            sw.WriteLine(" Total average hours per assignment: " + average);
+                            sw.WriteLine("-------------------------------------------------");
+
+                            //Close the file
+                            sw.Close();
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Exception: " + e.Message);
+                        }
+                        finally
+                        {
+                            Console.WriteLine("File Created.");
+                            Console.WriteLine("Thank you for using the program!");
+
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Exception: " + e.Message);
-                    }
-                    finally
-                    {
-                        Console.WriteLine("File Created.");
-                        Console.WriteLine("Thank you for using the program!");
-
-                    }
-                }
 
                 }
                 else if (decision == 5) //program exiter
