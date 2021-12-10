@@ -88,11 +88,11 @@ namespace Final_Project
                 Console.WriteLine("|-------------------------------------------------------------------------------------|");
                 Console.WriteLine("|                          Andrew Dowd's Software Recorder                            |");
                 Console.WriteLine("|-------------------------------------------------------------------------------------|");
-                Console.WriteLine("| 1. create an employee                                                               |");
-                Console.WriteLine("| 2. add a completed work assignment to the record                                    |");
-                Console.WriteLine("| 3. get a preview of the record                                                      |");                                               
-                Console.WriteLine("| 4. convert the record into a file                                                   |");
-                Console.WriteLine("| 5. exit the program                                                                 |");
+                Console.WriteLine("| 1 - create an employee                                                               |");
+                Console.WriteLine("| 2 - add a completed work assignment to the record                                    |");
+                Console.WriteLine("| 3 - get a preview of the record                                                      |");                                               
+                Console.WriteLine("| 4 - convert the record into a file                                                   |");
+                Console.WriteLine("| 5 - exit the program                                                                 |");
                 Console.WriteLine("|-------------------------------------------------------------------------------------|");
                 Console.WriteLine("| Enter the number corrosponding to the option to select it                           |");
                 Console.WriteLine("|-------------------------------------------------------------------------------------|\n");
