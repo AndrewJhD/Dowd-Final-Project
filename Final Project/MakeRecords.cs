@@ -157,6 +157,11 @@ namespace Final_Project
             return i * 2 + 2;
         }
 
+        public void PrintAll()
+        {
+
+        }
+
 
 
     }

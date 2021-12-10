@@ -16,7 +16,6 @@
 ***************************************************************/
 using System;
 using System.IO;
-using System.Text;
 
 namespace Final_Project
 {
@@ -65,6 +64,8 @@ namespace Final_Project
             Employee emp = new Employee(); //acts as a container to store data of the current employee
             string employeeName = "";
             int employeeId = 0;
+            string empOverride = "";
+
 
             double timeCounter = 0.00;
             int workCounter = 0;
@@ -74,6 +75,7 @@ namespace Final_Project
             int difTotal = 0;
             Work work = new Work(workDif, workId, workCompTime); //acts as a container to store a assignment when its inserted so it can be emported to the make record program
 
+            double average = timeCounter / workCounter;
 
             MakeRecords<Work> empWorkRecord = new MakeRecords<Work>();
             MakeRecords<Work> empWorkRecord2 = new MakeRecords<Work>();
@@ -90,23 +92,42 @@ namespace Final_Project
                 Console.WriteLine("| 3. get a preview of the record                                                      |");                                               
                 Console.WriteLine("| 4. convert the record into a file                                                   |");
                 Console.WriteLine("| 5. exit the program                                                                 |");
+                Console.WriteLine("|-------------------------------------------------------------------------------------|");
+                Console.WriteLine("| Enter the number corrosponding to the option to select it                           |");
                 Console.WriteLine("|-------------------------------------------------------------------------------------|\n");
 
-                converter = Console.ReadLine();
-                decision = Convert.ToInt32(converter);
 
-                string empOverride = "";
+                //verifiying block for the main menu//
+                while (decision == 0)
+                {
+                    converter = Console.ReadLine();
+
+
+                    if (int.TryParse(converter, out decision))
+                    {
+                        decision = Convert.ToInt32(converter);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: your input needs to contain only numbers");
+                        decision = 0;
+                    }
+
+                    
+                }
 
                 if (decision == 1) //only 1 at a time will work for this
                 {
-                    if(employeeId != 0)
+                    if(employeeId != 0) //override section
                     {
                         Console.WriteLine("Warning inserting another employee will overwrite the current employees information");
                         Console.WriteLine("If you wish to overwrite the current employee and also delete any data currently stored for that employee");
                         Console.WriteLine("if you are ok with this enter Y if you don't enter N");
 
                         empOverride = Console.ReadLine();
-                        //override section
+
+                        
+
                         if (empOverride.Equals("Y"))
                         {
                             Console.WriteLine("You selected to overwrite the current employee and erase all data associated with it");
@@ -114,15 +135,23 @@ namespace Final_Project
                             Console.Write("What's the employees name? ");
                             employeeName = Console.ReadLine();
 
-                            while (employeeId < 0 || employeeId == 0) //makes sure employee id isnt 0 or less than 0
+                            while (employeeId < 0 || employeeId == 0) //makes sure employee id isnt 0 or less than 0 and a number
                             {
                                 Console.Write("What's the employees id? ");
                                 converter = Console.ReadLine();
-                                employeeId = Convert.ToInt32(converter);
 
-                                if (employeeId < 0 || employeeId == 0)
+                                if (int.TryParse(converter, out employeeId))
                                 {
-                                    Console.WriteLine("Error the employee id cannot be a value less than 1");
+                                    employeeId = Convert.ToInt32(converter);
+                                }
+                                else if (employeeId < 0 || employeeId == 0)
+                                {
+                                    Console.WriteLine("Error: the employee id cannot be a value less than 1");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Error: your input needs to contain only numbers");
+                                    employeeId = 0;
                                 }
 
                             }
@@ -131,7 +160,8 @@ namespace Final_Project
 
                             for (int i = 0; i < workCounter; i++)
                             {
-                                empWorkRecord.Dequeue();
+                                empWorkRecord2.Dequeue(); //the container class
+                                empWorkRecord.Dequeue(); //the printed class
                             }
                             workCounter = 0;
                             difTotal = 0;
@@ -162,13 +192,24 @@ namespace Final_Project
                         {
                             Console.Write("What's the employees id? ");
                             converter = Console.ReadLine();
-                            employeeId = Convert.ToInt32(converter);
 
-                            if (employeeId < 0 || employeeId == 0)
+                            if (int.TryParse(converter, out employeeId))
                             {
-                                Console.WriteLine("Error the employee id cannot be a value less than 1");
-                            }
+                                employeeId = Convert.ToInt32(converter);
 
+                                if (employeeId < 0 || employeeId == 0)
+                                {
+                                    Console.WriteLine("Error: the employee id cannot be a value less than 1");
+                                    employeeId = 0;
+                                }
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error: your input isn't a number");
+
+                            }
+                            
                         }
                     
 
@@ -179,27 +220,40 @@ namespace Final_Project
                     Console.WriteLine("The employee you entered is: " + emp.ToString());
                     }
                 }
+
+                
                 else if (decision == 2) //assignment maker  (no limit)
                 {
                     bool workDiffVerification = false;
                     workDif = 0;
                     workId = 0;
                     workCompTime = 0.00;
+
                     while (workDiffVerification == false) 
                     { 
                     Console.Write("What's the assignments difficulty (on scale of 1 - 3)? ");
                     converter = Console.ReadLine();
-                    workDif = Convert.ToInt32(converter);
 
-                        if (workDif < 1 || workDif > 3)
-                        {
+                        if (int.TryParse(converter, out workDif))
+                        {      
+                            
+                            workDif = Convert.ToInt32(converter); // layered so it still protects against values outside accepted limits
+                            if (workDif < 1 || workDif > 3)
+                            {
 
-                            Console.WriteLine("Error the assignment's difficulty cannot be lower than 1 or higher than 3");
+                            Console.WriteLine("Error: the assignment's difficulty cannot be lower than 1 or higher than 3");
+                            }
+                            else
+                            {
+                            workDiffVerification = true;
+                            }
+
                         }
                         else
                         {
-                            workDiffVerification = true;
+                            Console.WriteLine("Error: your input must be a number not a letter");
                         }
+                        
                     }
 
 
@@ -207,12 +261,22 @@ namespace Final_Project
                     {
                         Console.Write("What's the assignments id? ");
                         converter = Console.ReadLine();
-                        workId = Convert.ToInt32(converter);
 
-                        if (workId < 0 || workId == 0)
+                        if (int.TryParse(converter, out workId))
                         {
-                            Console.WriteLine("Error the assignment id cannot be a value less than 1");
+                            workId = Convert.ToInt32(converter);
+
+                            if (workId < 0 || workId == 0)
+                            {
+                                Console.WriteLine("Error: the assignment id cannot be a value less than 1");
+                            }
+                            
                         }
+                        else
+                        {
+                            Console.WriteLine("Error: your input must be a number not a letter");
+                        }
+                        
 
                     }
 
@@ -220,15 +284,25 @@ namespace Final_Project
                     {
                         Console.Write("How long did the assignment take? ");
                         converter = Console.ReadLine();
-                        workCompTime = Convert.ToDouble(converter);
 
-                        if (workCompTime < 0 || workCompTime == 0)
+                        if (double.TryParse(converter, out workCompTime))
                         {
-                            Console.WriteLine("Error the assignment id cannot be a value less than 1");
-                        }
+                            workCompTime = Convert.ToDouble(converter);
 
+                            if (workCompTime < 0 || workCompTime == 0)
+                            {
+                                Console.WriteLine("Error the assignment id cannot be a value less than 1");
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: your input must be a number or decimal not a letter");
+                        }
+                        
                     }
                     
+
                     difTotal = difTotal + workDif;
                     timeCounter = workCompTime + timeCounter;
                     work = new Work(workDif, workId, workCompTime);
@@ -236,11 +310,14 @@ namespace Final_Project
                     Console.WriteLine("The finished assignment you submitted is: " + work.ToString());
 
                     workCounter++;
-                    empWorkRecord.Enqueue(workDif,work);
-                   
+                    empWorkRecord.Enqueue(workDif,work); //for printing
+                    empWorkRecord2.Enqueue(workDif, work); //container
                 }
+                //end of 2nd section
+
                 else if (decision == 3) //preview the record
                 {
+                    
 
                     Console.WriteLine("-------------------------------------------------");
                     Console.WriteLine(emp.ToString());
@@ -251,7 +328,7 @@ namespace Final_Project
 
                     for (int i = 0; i < workCounter; i++)
                     {
-                        Console.WriteLine(empWorkRecord.Dequeue());
+                        Console.WriteLine(empWorkRecord2.Dequeue());
                     }
                     Console.WriteLine("-------------------------------------------------");
                     Console.WriteLine("Total difficulty of all assignments: " + difTotal);
@@ -260,11 +337,15 @@ namespace Final_Project
                     Console.WriteLine("-------------------------------------------------");
                     Console.WriteLine("Total hours of work done on all assignments: " + timeCounter);
                     Console.WriteLine("-------------------------------------------------");
+                    Console.WriteLine(" Total average hours per assignment: " + average);
+                    Console.WriteLine("-------------------------------------------------");
+
 
                 }
                 else if (decision == 4) //file maker
                 {
                     string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
+                   
 
                     string path = @"C:\Temp\" + employeeName + " " + date + "EmployeeRecords.txt";
                     try
@@ -290,6 +371,8 @@ namespace Final_Project
                         sw.WriteLine("Total number of assignments: " + workCounter);
                         sw.WriteLine("-------------------------------------------------");
                         sw.WriteLine("Total hours of work done on all assignments: " + timeCounter);
+                        sw.WriteLine("-------------------------------------------------");
+                        sw.WriteLine(" Total average hours per assignment: " + average);
                         sw.WriteLine("-------------------------------------------------");
 
                         //Close the file
