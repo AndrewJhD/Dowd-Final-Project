@@ -159,7 +159,10 @@ namespace Final_Project
 
         public void PrintAll()
         {
-
+            foreach (Node node in queue)
+            {
+                Console.WriteLine(node.Object);
+            }
         }
 
 
