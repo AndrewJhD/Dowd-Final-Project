@@ -76,6 +76,7 @@ namespace Final_Project
 
 
             MakeRecords<Work> empWorkRecord = new MakeRecords<Work>();
+            MakeRecords<Work> empWorkRecord2 = new MakeRecords<Work>();
             while (decision != 5) //menu looper
             {
 

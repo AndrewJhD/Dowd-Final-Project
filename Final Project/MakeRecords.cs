@@ -87,7 +87,7 @@ namespace Final_Project
             return false;
         }
 
-        private void BuildHeapMax(int i)
+        private void BuildHeapMax(int i) //is part of my sorting algorithm
         {
             while (i >= 0 && queue[(i - 1) / 2].Priority < queue[i].Priority)
             {
@@ -95,7 +95,7 @@ namespace Final_Project
                 i = (i - 1) / 2;
             }
         }
-        private void BuildHeapMin(int i)
+        private void BuildHeapMin(int i) //is part of my sorting algorithm
         {
             while (i >= 0 && queue[(i - 1) / 2].Priority > queue[i].Priority)
             {
