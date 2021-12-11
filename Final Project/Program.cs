@@ -133,10 +133,24 @@ namespace Final_Project
 
                         if (empOverride.Equals("Y"))
                         {
+                            employeeName = "";
+                            employeeId = 0;
                             Console.WriteLine("You selected to overwrite the current employee and erase all data associated with it");
 
-                            Console.Write("What's the employees name? ");
-                            employeeName = Console.ReadLine();
+                            while (employeeName == "")
+                            {
+                                Console.Write("What's the employees name? ");
+                                employeeName = Console.ReadLine();
+
+                                if (employeeName == "")
+                                {
+                                    Console.WriteLine("Error: you didn't input a name");
+                                }
+                                else
+                                {
+                                    employeeName = char.ToUpper(employeeName[0]) + employeeName.Substring(1);
+                                }
+                            }
 
                             while (employeeId < 0 || employeeId == 0) //makes sure employee id isnt 0 or less than 0 and a number
                             {
