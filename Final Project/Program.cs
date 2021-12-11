@@ -64,21 +64,22 @@ namespace Final_Project
             int decision = 0;
             Employee emp = new Employee(); //acts as a container to store data of the current employee
             string employeeName = "";
-            int employeeId = 0;
-            string empOverride = "";
+            int employeeId = 0; //employee id storage
+            string empOverride = ""; //answer for over riding storage
 
 
-            double timeCounter = 0.00;
-            int workCounter = 0;
-            int workDif = 0;
-            int workId = 0;
-            double workCompTime = 0.00;
-            int difTotal = 0;
+            int workCounter = 0; //total assignments entered
+            int workDif = 0; // difficulty lvl storage
+            int workId = 0; // assignment id storage
+
+            double workCompTime = 0.00; // total of complete time storage
+            int difTotal = 0; //difficulty lvl stotal storage
             Work work = new Work(workDif, workId, workCompTime); //acts as a container to store a assignment when its inserted so it can be emported to the make record program
+            double timeCounter = 0.00;
 
-            double average = timeCounter / workCounter;
+            double average = timeCounter / workCounter; //average variable
             Stack<Employee> employeeStack = new Stack<Employee>(1); //to store emloyee
-            MakeRecords<Work> empWorkRecord = new MakeRecords<Work>();
+            MakeRecords<Work> empWorkRecord = new MakeRecords<Work>(); //to store assignments
 
             while (decision != 5) //menu looper
             {
@@ -121,6 +122,7 @@ namespace Final_Project
                 {
                     if (employeeId != 0) //override section
                     {
+                        
                         Console.WriteLine("Warning inserting another employee will overwrite the current employees information");
                         Console.WriteLine("If you wish to overwrite the current employee and also delete any data currently stored for that employee");
                         Console.WriteLine("if you are ok with this enter Y if you don't enter N");
