@@ -77,7 +77,7 @@ namespace Final_Project
             Work work = new Work(workDif, workId, workCompTime); //acts as a container to store a assignment when its inserted so it can be emported to the make record program
             double timeCounter = 0.00;
 
-            double average = timeCounter / workCounter; //average variable
+            double average = 0; //average variable
             Stack<Employee> employeeStack = new Stack<Employee>(1); //to store emloyee
             MakeRecords<Work> empWorkRecord = new MakeRecords<Work>(); //to store assignments
 
@@ -339,6 +339,7 @@ namespace Final_Project
                     }
                     else
                     {
+                        average = timeCounter / workCounter;
 
                         Console.WriteLine("-------------------------------------------------");
                         Console.WriteLine(employeeStack.Peek());
@@ -372,12 +373,12 @@ namespace Final_Project
                     else
                     {
                         string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
-
+                        average = timeCounter / workCounter;
 
                         string path = @"C:\Temp\" + employeeName + date + "EmployeeRecords.txt";
                         try
                         {
-
+                            
                             StreamWriter sw = new StreamWriter(path);
 
                             //writing stuff into the file
@@ -392,7 +393,6 @@ namespace Final_Project
 
                             sw.WriteLine("-------------------------------------------------");
                             sw.WriteLine("Employee Statistics:");
-                            sw.WriteLine("-------------------------------------------------");
                             sw.WriteLine("-------------------------------------------------");
                             sw.WriteLine("-------------------------------------------------");
                             sw.WriteLine("Total difficulty of all assignments: " + difTotal);
